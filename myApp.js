@@ -25,7 +25,7 @@ app.get("/json", function (req, res) {
   res.json({ message: message });
 });
 
-// Ruta /now con middleware encadenado
+
 app.get("/now", function(req, res, next) {
   req.time = new Date().toString();
   next();
@@ -33,9 +33,16 @@ app.get("/now", function(req, res, next) {
   res.json({ time: req.time });
 });
 
-// Ruta echo pedida por FCC
+
 app.get("/:word/echo", function(req, res) {
   res.json({ echo: req.params.word });
+});
+
+app.get("/name", function(req, res) {
+  const first = req.query.first;
+  const last = req.query.last;
+
+  res.json({ name: `${first} ${last}` });
 });
 
 module.exports = app;
