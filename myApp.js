@@ -25,12 +25,17 @@ app.get("/json", function (req, res) {
   res.json({ message: message });
 });
 
-// 👉 Ruta pedida por FCC
+// Ruta /now con middleware encadenado
 app.get("/now", function(req, res, next) {
   req.time = new Date().toString();
   next();
 }, function(req, res) {
   res.json({ time: req.time });
+});
+
+// Ruta echo pedida por FCC
+app.get("/:word/echo", function(req, res) {
+  res.json({ echo: req.params.word });
 });
 
 module.exports = app;
