@@ -15,7 +15,6 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-
 app.get("/json", function (req, res) {
   let message = "Hello json";
 
@@ -24,6 +23,14 @@ app.get("/json", function (req, res) {
   }
 
   res.json({ message: message });
+});
+
+// 👉 Ruta pedida por FCC
+app.get("/now", function(req, res, next) {
+  req.time = new Date().toString();
+  next();
+}, function(req, res) {
+  res.json({ time: req.time });
 });
 
 module.exports = app;
